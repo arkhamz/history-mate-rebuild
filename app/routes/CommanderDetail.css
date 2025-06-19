@@ -1,0 +1,131 @@
+.commander-detail-container{
+    display:grid;
+    /* grid-template-columns: 1fr 1fr 1fr; */
+    grid-template-columns: repeat(3, minmax(10px,1fr));
+    min-height: calc(100% - 100px);
+    width: 100%;
+    /* background-image: url("../smoke1.jpeg"); */
+    /* background-position: cover; */
+    background-color: #1b1b1b;
+    color: white;
+    justify-items: space-evenly;
+    align-content: center;
+}
+
+
+/* div of name, portrait and flag img  */
+.commander-pic-title{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* <img> of commander portrait */
+.commander-portrait{
+    height: 60vh;
+    object-fit: contain;
+}
+
+
+
+/* commander's loyalty flag <img> */
+.flag-small{
+    width: 130px;
+    height: 130px;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+/* div of commander facts */
+.commander-details{
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 2rem;
+}
+
+.commander-details h2{
+    width: fit-content;
+    color: white;
+}
+
+/* div of commander bio */
+.commander-bio{
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 25px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-align: justify;
+    margin-right: 10px;
+}
+
+.commander-header{
+    color: white;
+    text-align: center;
+}
+
+/* MEDIA QUERY - smaller screens */
+
+@media  screen and (max-width: 1350px) {
+
+    .commander-detail-container{
+        grid-template-columns: none;
+        grid-template-areas: 
+        "pic"
+        "details"
+        "bio";
+        justify-items: center;
+        align-items: center;
+        width: 100%;
+        gap: 20px;
+    }
+
+    .commander-pic-title{
+        max-width: 70vw;
+        margin: 0 auto;
+        grid-area: pic;
+
+    }
+
+    /* Picture of commander */
+    .commander-portrait{
+        max-width: 70vw;
+        object-fit: contain;
+      
+    }
+
+    .commander-details{
+        max-width: 70vw;
+        margin: 0 auto;
+        border: 1px solid white;
+        border-radius: 7px;
+        margin-top: 20px;
+        grid-area: details;
+    }
+
+    .commander-bio{
+        max-width: 70vw;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        text-align: justify;
+        grid-area: bio;
+
+    }
+
+    .commander-details h2{
+        border: none;
+        box-shadow: none;
+    }
+
+    .commander-header{
+        width: 80vw;
+    }
+
+}

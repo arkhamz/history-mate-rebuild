@@ -6,9 +6,19 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
+import Navbar from "./components/navbar/Navbar";
+import Footer from "./components/footer/Footer";
+import Spinner from "./components/spinner/Spinner";
+import AuthLoader from "./components/auth-loader/AuthLoader";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -42,7 +52,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <Provider store={store}>
+      <AuthLoader>
+        <Navbar />
+        <Outlet />
+        {/* <Footer /> */}
+      </AuthLoader>
+    </Provider>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {

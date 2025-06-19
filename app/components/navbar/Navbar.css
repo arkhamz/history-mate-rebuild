@@ -1,0 +1,147 @@
+nav {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  background-color: #2b2a2a;
+  box-shadow: 0 3px 5px 10px rgb(0 0 0 / 50%);
+}
+
+nav button {
+  background-color: #2b2a2a;
+  border: 1px solid white;
+  border-radius: 4px;
+  padding: 3px;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+nav button:hover{
+  filter:invert(1);
+  font-weight: bold;
+}
+
+.nav-logo {
+  width: 180px;
+  margin-right: auto;
+  object-fit: contain;
+}
+
+ul.links {
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  gap: 15px;
+  display: flex;
+  list-style-type: none;
+  padding-right: 5px;
+  background-color: inherit;
+}
+
+ul.links a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.globe {
+  font-size: 2rem;
+  transition: transform 1s ease-in-out;
+}
+
+.globe:hover {
+  transform: rotate(360deg) !important;
+}
+
+
+.user-name{
+  color: white;
+}
+
+/* active class for <NavLInk> component */
+.active{
+  border-bottom: 2px solid white;
+}
+/* progress icons */
+.status-light {
+  color: white;
+  filter: contrast(2);
+  transition: color 300ms ease-in-out;
+}
+
+
+
+/* -------------------collapsible navbar code-------------- */
+
+/* div containing menu icons  */
+.nav-toggler {
+  display: none;
+  margin-left: 2rem;
+}
+/* <Link> containing the icon */
+.menu-icon {
+  margin-top: 10px;
+  font-size: 3rem;
+  text-decoration: none;
+  color: white;
+}
+
+/* ul with links & links-active class, when button is toggled/menuOPen =  true */
+.links.links-active {
+  top: 0%;
+}
+
+/* when menuOPen is true, this class sets media query ul.links top from -100 (
+  (above screen) to 0 (at top of screen) */
+
+@media screen and (max-width: 936px) {
+
+    /* <ul> of navigation list items */
+    ul.links {
+      position: absolute;
+      top: -150%;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content:center;
+      gap: 20px;
+      align-items: center;
+      transition: 450ms ease-in-out;
+      background-color: #2b2a2a;
+      z-index: 4000000;
+      /* high Z index needed to show over everything, had 4000 previously
+      but leaflet map was higher, had to do a large number to override leaflet map */
+    }
+
+    ul.links a, ul.links svg{
+      font-size:1.5rem;
+    }
+
+  /* normally hidden div - contains menu icons */
+  .nav-toggler {
+    display: block;
+    position: absolute;
+    left: 2%;
+    z-index: 4000000;
+    /* makes div visible, and the icons inside.
+    is fixed on screen, 3% from the left of viewport */
+  }
+
+  /* margin-right was prev auto to push it to left, set to 0 to make it centre */
+  .nav-logo {
+    margin-right: 0;
+  }
+}
+
+/* progress icons on navbar */
+
+nav .status {
+  /* border-left: 3px double white; */
+  border-radius: 3px;
+}
+
+
+
+

@@ -1,0 +1,46 @@
+.commander-card {
+
+
+
+}
+
+.commander-card__content-container{
+    display:flex;
+  flex-direction: column;
+
+}
+
+.commander-card__image-container{
+  height:150px;
+position:relative;
+
+}
+
+.commander-card__image{
+ object-fit: cover;
+ object-position: 0% 5%;
+ position:absolute;
+ width:100%;
+ height:100%;
+}
+
+.commander-card__text-container{
+  color:white;
+}
+
+.commander-card__text-container span{
+    font-size:12px;
+  }
+
+
+.commander-card:hover {
+  /* transform: translateY(20px); */
+}
+
+
+
+
+
+
+
+
