@@ -13,6 +13,7 @@ import { useGetAllUserBattlesQuery } from "~/services.ts/api";
 import Spinner from "~/components/spinner/Spinner";
 import { useSelector } from "react-redux";
 import { selectUser, selectUserLoading } from "~/store/user/userSelectors";
+import MapMarker from "~/components/map-marker/MapMarker";
 
 // import type { Route } from "./+types/Atlas";
 
@@ -57,33 +58,34 @@ function Atlas() {
         />
         {battles?.length
           ? battles.map(function (item, index, arr) {
-              const myIcon = new Icon({
-                iconUrl: gunIcon,
-                iconSize: [60, 60],
-                iconAnchor: [12, 41],
-                // if battle index batches last index, give animate class
-                className: index === arr.length - 1 ? "recent" : "",
-              });
-
               return (
-                <Marker
+                <MapMarker
                   key={item.id}
-                  position={[item.latitude, item.longitude]}
-                  icon={myIcon}
-                  eventHandlers={{
-                    mouseover: (event) => event.target.openPopup(),
-                  }}
-                >
-                  <Popup offset={[20, -20]}>
-                    <span
-                      className="popup-text"
-                      onClick={(e) => navigate(`/battles/${item.id}`)}
-                    >
-                      {item.name} - {item.date}
-                    </span>
-                  </Popup>
-                </Marker>
+                  battle={item}
+                  battleIndex={index}
+                  battleArr={arr}
+                />
               );
+
+              // return (
+              //   <Marker
+              //     key={item.id}
+              //     position={[item.latitude, item.longitude]}
+              //     icon={myIcon}
+              //     eventHandlers={{
+              //       mouseover: (event) => event.target.openPopup(),
+              //     }}
+              //   >
+              //     <Popup offset={[20, -20]}>
+              //       <span
+              //         className="popup-text"
+              //         onClick={(e) => navigate(`/battles/${item.id}`)}
+              //       >
+              //         {item.name} - {item.date}
+              //       </span>
+              //     </Popup>
+              //   </Marker>
+              // );
             })
           : null}
       </MapContainer>

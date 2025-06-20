@@ -2,16 +2,13 @@ import "./Navbar.css";
 import { useState, useEffect, type FormEvent } from "react";
 import { Link, NavLink, useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import test from "../../assets/okayTest.svg";
-
+import navlogo from "../../assets/nav-logo.svg";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { FaGlobeEurope } from "react-icons/fa";
 import { useGetBattlesCountQuery, useLogoutMutation } from "~/services.ts/api";
 import { statusIcons, titler } from "utils";
 import { selectUser } from "~/store/user/userSelectors";
 import { LOGOUT } from "~/store/user/userSlice";
-import { selectLevel } from "~/store/appState/appStateSelectors";
-import Spinner from "../spinner/Spinner";
 
 function Navbar() {
   const dispatch = useDispatch();
@@ -58,54 +55,69 @@ function Navbar() {
   }
 
   return (
-    <nav>
-      <ul
-        onClick={handleLinkClick}
-        className={menuOpen ? "links links-active" : "links"}
-      >
-        <img
-          onClick={(e) => {
-            user && navigate("/");
-          }}
-          className="nav-logo"
-          src={test}
-          alt=""
-        />
-        <div className="status">
-          {user && progress
-            ? statusIcons(progress).map(function (item, index, arr) {
-                return <item.Component key={index} className={item.class} />;
-              })
-            : null}
+    <nav className="navbar outer-wrapper">
+      <div className="navbar__inner-wrapper inner-wrapper">
+        <div className="navbar__logo-container">
+          <img
+            onClick={(e) => {
+              user && navigate("/");
+            }}
+            className="navbar__logo"
+            src={navlogo}
+            alt=""
+          />
         </div>
-        {user && title ? (
-          <span className="user-name">
-            {user.username} {`(${title})`}
-          </span>
-        ) : null}
-        <NavLink to="/atlas">
-          <FaGlobeEurope onClick={() => setMenuOpen(false)} className="globe" />
-        </NavLink>
-        <NavLink to="/background">Background</NavLink>
-        <NavLink to="/commanders">Commanders</NavLink>
 
-        {!user ? <NavLink to="/signup">Signup</NavLink> : null}
-        {!user ? (
-          <NavLink to="/login">Login</NavLink>
-        ) : (
-          <button onClick={() => handleClick()}>Logout</button>
-        )}
-      </ul>
-      <div onClick={handleMenuClick} className="nav-toggler">
-        <Link className="menu-icon" to="#">
-          {menuOpen ? (
-            <i>{<AiOutlineClose />}</i>
-          ) : (
-            <i>
-              <AiOutlineMenu />
-            </i>
-          )}
-        </Link>
+        <div className="navbar__main">
+          <div className="navbar__user-info">
+            {/* {user && title ? (
+              <span className="username">
+                {`${title}`} {user.username}
+              </span>
+            ) : null} */}
+            {user && progress ? (
+              <div className="navbar__progress">
+                {statusIcons(progress).map(function (item, index, arr) {
+                  return <item.Component key={index} className={item.class} />;
+                })}
+              </div>
+            ) : null}
+          </div>
+          <ul
+            onClick={handleLinkClick}
+            className={
+              menuOpen ? "navbar__links links-active" : "navbar__links"
+            }
+          >
+            <NavLink to="/atlas">
+              <FaGlobeEurope
+                onClick={() => setMenuOpen(false)}
+                className="globe"
+              />
+            </NavLink>
+            <NavLink to="/background">Background</NavLink>
+            <NavLink to="/commanders">Commanders</NavLink>
+
+            {!user ? <NavLink to="/signup">Signup</NavLink> : null}
+            {!user ? (
+              <NavLink to="/login">Login</NavLink>
+            ) : (
+              <button onClick={() => handleClick()}>Logout</button>
+            )}
+          </ul>
+        </div>
+
+        <div onClick={handleMenuClick} className="nav-toggler">
+          <Link className="menu-icon" to="#">
+            {menuOpen ? (
+              <i>{<AiOutlineClose />}</i>
+            ) : (
+              <i>
+                <AiOutlineMenu />
+              </i>
+            )}
+          </Link>
+        </div>
       </div>
     </nav>
   );

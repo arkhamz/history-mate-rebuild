@@ -3,6 +3,7 @@ import "./CommanderDetail.css";
 import SpringFade from "../components/spring-fade/springFade";
 import { useGetAllCommandersQuery } from "~/services.ts/api";
 import type { Commander } from "~/types/types";
+import { reverseDate } from "utils";
 
 function CommanderDetail() {
   const navigate = useNavigate();
@@ -18,8 +19,56 @@ function CommanderDetail() {
   return (
     <>
       {commander && (
-        <div className="commander-detail-container outer-wrapper">
-          <SpringFade>
+        <div className="commander-detail__container outer-wrapper">
+          <div className=" commander-detail__inner-wrapper inner-wrapper">
+            <div className="commander-detail__image-stats">
+              <div className="commander-detail__image-container">
+                <img
+                  loading="lazy"
+                  className="commander-portrait"
+                  src={commander.image_url}
+                  alt=""
+                />
+              </div>
+              <div className="commander-detail__statistics">
+                <div className="commander-detail__stat-unit">
+                  <p className="commander-detail__stat-title">BIRTH DATE</p>
+                  <p className="commander-detail__stat-data">
+                    {reverseDate(commander.birth_date)}
+                  </p>
+                </div>
+                <div className="commander-detail__stat-unit">
+                  <p className="commander-detail__stat-title">BIRTH PLACE</p>
+                  <p className="commander-detail__stat-data">
+                    {commander.birth_location}
+                  </p>
+                </div>
+                <div className="commander-detail__stat-unit">
+                  <p className="commander-detail__stat-title">ALLEGIANCE</p>
+                  <p className="commander-detail__stat-data">
+                    {commander.loyalty}
+                  </p>
+                </div>
+                <div className="commander-detail__stat-unit">
+                  <p className="commander-detail__stat-title">DIED</p>
+                  <p className="commander-detail__stat-data">
+                    {reverseDate(commander.death_date)}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="commander-detail__name-biography">
+              <div className="commander-detail__title">
+                <h1>{commander.full_name}</h1>
+                <p>{commander.title}</p>
+              </div>
+              <div className="commander-detail__biography">
+                <h2>BIOGRAPHY</h2>
+                <p>{commander.bio}</p>
+              </div>
+            </div>
+          </div>
+          {/* <SpringFade>
             <div className="commander-details">
               <h2>Title: {commander.title}</h2>
               <h2> Birth Date: {commander.birth_date}</h2>
@@ -46,7 +95,7 @@ function CommanderDetail() {
 
           <SpringFade className="commander-bio">
             <p>{commander.bio}</p>
-          </SpringFade>
+          </SpringFade> */}
         </div>
       )}
     </>

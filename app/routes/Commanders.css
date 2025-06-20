@@ -1,4 +1,4 @@
-.commanders-container {
+.commanders__container {
   width: 100%;
   background-color: #1b1b1b;
   display: flex;
@@ -8,8 +8,13 @@
   align-items: center;
 }
 
-.commanders-header {
+.commanders__container .inner-wrapper{
+  max-width:var(--content-width);
+}
+
+.commanders__header {
   color: white;
+  margin-bottom:20px;
 }
 
 a {
@@ -17,7 +22,7 @@ a {
   margin-right: 5px;
 }
 
-.commanders-grid{
+.commanders__grid{
   display:grid;
   grid-template-columns:1fr 1fr 1fr 1fr;
   gap:16px;

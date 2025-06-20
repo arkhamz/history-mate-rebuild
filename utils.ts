@@ -38,3 +38,18 @@ export function statusIcons(progress: number) {
   }
   return iconsArr;
 }
+
+export function reverseDate(date: string): string {
+  const [year, month, day] = date.split("-");
+
+  if (!year || !month || !day) {
+    return "";
+  }
+
+  const dateObj = new Date(date);
+  const formatted = dateObj.toLocaleString("en-gb", {
+    month: "long",
+    year: "numeric",
+  });
+  return formatted;
+}

@@ -1,95 +1,62 @@
 /* medieval font? */
 @import url("https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap");
 
-.battle-container {
+
+
+.battle__container {
   width: 100%;
-  min-height: 100%;
-  display: grid;
-  grid-template-areas:
-    "belig1 content belig2"
-    "com1 detail com2"
-    "stats1 quiz stats2"
-    ". frame .";
-  /* align-items: center; */
-  justify-items: center;
-  justify-content: space-around;
-  align-content: center;
+color:white;
   background-image: url("../smoke1.jpeg");
   background-size: cover;
-  color: white;
+  display:flex;
+  justify-content:center;
+
 }
 
-/* container div for beligierent divs */
+.battle__container .inner-wrapper{
+  width:100%;
+  display:flex;
+flex-direction:column;
+align-items:center;
+max-width:1000px;
+
+}
+
+.battle__title{
+  margin-bottom:20px;
+  border-bottom:1px solid white;
+}
+
+.battle__title h1{
+  text-transform: uppercase;
+}
+
+.battle__belligerents{
+  display:flex;
+  width:100%;
+  align-items:top;
+  justify-content: space-evenly;
+  margin-bottom:20px;
+}
+
 .beligerents-1 {
   display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  grid-area: belig1;
-  align-self: end;
+flex-direction:column;
+gap:8px;
 }
 
 .beligerents-2 {
   display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  grid-area: belig2;
-  align-self: end;
+  gap:8px;
+flex-direction:column;
 }
 
-.beligerent h3,
-.beligerent h3 {
-  color: white;
-}
 
-/* div container of beligerent name and pic */
-.beligerent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-/* img element */
-.beligerent-flag {
-  object-fit: contain;
-  width: 150px;
-  height: 100px;
-}
-
-/* container div for commander divs */
-.commanders-1 {
-  width: max-content;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-  grid-area: com1;
-  align-self: start;
-  margin-top: 20vh;
-}
-
-.commanders-2 {
-  width: max-content;
-  /* height: 100px; */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-  grid-area: com2;
-  align-self: start;
-  margin-top: 20vh;
-}
-
-/* div container of commander name and pic */
-.commander {
-  display: flex;
-  gap: 3px;
-  align-items: center;
-  align-self: baseline;
-  /* baseline align-self aligns each child with other children */
-}
+ .commander{
+  display:flex;
+  align-items:center;
+  gap:8px;
+} 
 
 /* img element,border radius of 60% to make round, and cover not contain */
 .commander-flag {
@@ -99,34 +66,95 @@
   height: 35px;
 }
 
-.content {
-  /* width: 60%; */
-  /* width: 40vw; */
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  grid-area: content;
-  justify-self: center;
+
+.battle__image-container{
+  position:relative;
+  height:400px;
+  /* height: 300px; */
+  width:70%;
+  margin-bottom:20px;
+
 }
+
+.battle__image-container .battle-pic {
+  inset:0;
+  height:100%;
+  width:100%;
+  object-fit: cover;
+  position:absolute;
+  border: 1px solid whitesmoke;
+}
+
+
+.battle__statistics{
+  display:grid;
+  grid-template-columns:50% 50%;
+  row-gap:16px;
+
+}
+
+.stat-unit{
+display:flex;
+gap:8px;
+align-items: center;
+border-bottom:1px solid whitesmoke;
+}
+
+.stat-unit-icon{
+  
+}
+
+.stat-unit-icon svg{
+  height:40px;
+  width:40px;
+}
+
+.stat-unit-text{
+
+}
+
+.stat-unit-title{
+  font-size:32px;
+}
+
+.stat-unit-value{font-size:20px;}
+
+.battle__result{}
+
+.battle__text-container h2{
+  margin-bottom:8px;
+
+}
+
+.battle__prelude{
+
+}
+
+.battle__text{
+
+}
+
+.battle__extras-container{
+  width:100%;
+
+}
+
+.battle__video-container{
+    width: 100%;
+}
+
+.battle__video-container iframe{
+
+   width:100%;
+  /* max-width:100%; */
+}
+
 
 .battle-result {
   text-align: center;
 }
 
-.battle-title h1 {
-  margin-bottom: 10px;
-  width: 40vw;
-  text-align: center;
-}
 
-/* <img> of main battle */
-img.battle-pic {
-  max-width: 60%;
-  border-radius: 6px;
-}
 
 /* div containing prelude and description divs of header and paragraph */
 .battle-detail {
@@ -138,13 +166,6 @@ img.battle-pic {
   color: whitesmoke;
   backdrop-filter: blur(5px);
   grid-area: detail;
-}
-
-.battle-detail p,
-.battle-detail h2 {
-  line-height: 25px;
-  letter-spacing: 2px;
-  font-weight: bold;
 }
 
 .prelude,
@@ -162,233 +183,11 @@ img.battle-pic {
   padding: 4px;
 }
 
-.stats-1 {
-  display: flex;
-  border-radius: 4px;
-  flex-direction: column;
-  gap: 15px;
-  align-self: center;
-  text-align: center;
-  grid-area: stats1;
-}
-
-.stats-1 h3,
-.stats-2 h3 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.stats-2 {
-  display: flex;
-  border-radius: 4px;
-  flex-direction: column;
-  gap: 15px;
-  align-self: center;
-  text-align: center;
-  grid-area: stats2;
-}
-
-.stats-1 svg,
-.stats-2 svg {
-  font-size: 2rem;
-}
-
-.stats-2 h2 {
-  width: max-content;
-}
-
-/* flip the battle statistic icons on the right to face left side */
-.stats-2 svg {
-  transform: scaleX(-1);
-}
-
 .quiz-wrapper {
   margin: 20px 0;
   justify-self: center;
-  grid-area: quiz;
   align-self: flex-start;
   width: 40vw;
 }
 
-.video {
-  width: 70%;
-  grid-area: frame;
-}
 
-.video iframe {
-  margin-top: 10px;
-  width: 100%;
-}
-
-/* -------------MEDIA QUERIES ------------------------------------- */
-/* laptop-tablet */
-@media screen and (max-width: 1400px) {
-  .battle-container {
-    /* grid-template-areas:
-      "content content"
-      "belig1 belig2"
-      "com1 com2"
-      "detail detail"
-      "stats1 stats2"
-      "quiz quiz"
-      "frame frame"; */
-    grid-template-areas:
-      "belig1 content belig2"
-      "com1 detail com2"
-      "stats1 quiz stats2"
-      ". frame .";
-    align-items: center;
-    justify-content: center;
-    align-content: flex-end;
-    /* column-gap: 100px;
-      row-gap: 50px; */
-  }
-
-  img.battle-pic {
-    /* width: 50vw; */
-    width: 100%;
-    object-fit: contain;
-  }
-
-  .beligerent-flag {
-    object-fit: cover;
-    max-width: 70px;
-    max-height: 70px;
-    border-radius: 60%;
-  }
-
-  .beligerents-1,
-  .beligerents-2 {
-    flex-direction: column;
-    align-self: flex-end;
-  }
-
-  .commanders-1,
-  .commanders-2 {
-    align-self: baseline;
-    align-items: baseline;
-    justify-content: center;
-    margin: 40px 0;
-  }
-
-  .commander-flag {
-    width: 45px;
-    height: 45px;
-  }
-
-  .commander {
-    flex-direction: column;
-    margin: 0 auto;
-    align-items: center;
-    /* justify-content: center; */
-    justify-self: center;
-  }
-
-  .quiz-wrapper {
-    width: 40vw;
-  }
-
-  .casualty {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .casualty h3 {
-    display: flex;
-    text-align: center;
-  }
-}
-
-/* MEDIA QUERIES - mobile  */
-@media screen and (max-width: 658px) {
-  .battle-container {
-    grid-template-areas:
-      "content content"
-      "belig1 belig2"
-      "com1 com2"
-      "detail detail"
-      "stats1 stats2"
-      "quiz quiz"
-      "frame frame";
-    align-items: center;
-    justify-content: center;
-    align-content: flex-end;
-    /* column-gap: 100px;
-      row-gap: 50px; */
-  }
-
-  .content,
-  .battle-detail {
-    width: 80vw;
-  }
-
-  .content {
-    margin-bottom: 5%;
-  }
-
-  .battle-title h1 {
-    font-size: 1.3rem;
-    width: 90vw;
-    text-align: center;
-  }
-
-  .battle-result {
-    font-size: 0.7rem;
-    width: 90vw;
-    text-align: center;
-  }
-
-  .battle-pic {
-    width: 100%;
-    object-fit: contain;
-    margin: 0 auto;
-  }
-
-  .beligerent-flag {
-    object-fit: cover;
-    width: 30px;
-    height: 30px;
-  }
-
-  .beligerent h3 {
-    font-size: small;
-  }
-
-  .beligerents-1,
-  .beligerents-2 {
-    gap: 0px;
-    align-self: start;
-  }
-
-  .commander-flag {
-    object-fit: cover;
-    border-radius: 60%;
-    width: 30px;
-    height: 30px;
-  }
-
-  .stats-1 h3,
-  .stats-2 h3 {
-    font-size: small;
-  }
-
-  .stats-1 svg,
-  .stats-2 svg {
-    font-size: 1.5rem;
-  }
-
-  .video {
-    width: 80vw;
-    grid-area: frame;
-  }
-
-  .video iframe {
-    border-radius: 6px;
-  }
-
-  .quiz-wrapper {
-    width: 80vw;
-  }
-}

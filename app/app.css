@@ -18,24 +18,39 @@ body,
   width: 100%;
 }
 
+/* variables */
+html{
+
+  --content-width:1000px;
+}
+
 body{
     background-color: #1b1b1b;
 
 }
 
+p,span,h1,h2,h3,h4,h5,h6,a{
+  color:whitesmoke
+}
+
+p{
+  line-height:26px;
+}
+
+h1{
+    font-size:60px;
+    color:wh
+}
 
 /* Layout styles */
 .outer-wrapper{
-  /* padding: 80px 16px; */
-  /* width:100%; */
+
 }
 
 .inner-wrapper{
-  max-width:1280px;
+  max-width:var(--content-width);
+  padding:80px 16px;
 }
-
-
-
 
 
   @media (max-width:600px){

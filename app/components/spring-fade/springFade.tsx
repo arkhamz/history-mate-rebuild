@@ -1,8 +1,12 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type PropsWithChildren } from "react";
 import "./springFade.css"; // custom CSS file
 
-function SpringFade({ children, className = "" }) {
-  const ref = useRef(null);
+interface SpringFadeProps extends PropsWithChildren {
+  className?: string;
+}
+
+function SpringFade({ children, className = "" }: SpringFadeProps) {
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const el = ref.current;

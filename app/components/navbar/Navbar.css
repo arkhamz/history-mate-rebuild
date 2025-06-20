@@ -1,10 +1,29 @@
 nav {
   display: flex;
-  align-items: center;
   width: 100%;
-  height: auto;
   background-color: #2b2a2a;
   box-shadow: 0 3px 5px 10px rgb(0 0 0 / 50%);
+}
+
+.navbar__inner-wrapper{
+  width:100%;
+  max-width:unset;
+  padding:unset;
+  padding: 0px 40px;
+  display:flex;
+}
+
+.navbar__user-info{
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+}
+
+.navbar__main{
+  display:flex;
+  width:100%;
+  align-items: center;
+  justify-content: space-between;
 }
 
 nav button {
@@ -22,14 +41,16 @@ nav button:hover{
   font-weight: bold;
 }
 
-.nav-logo {
-  width: 180px;
-  margin-right: auto;
-  object-fit: contain;
+.navbar__logo-container{
+
 }
 
-ul.links {
-  width: 100%;
+.navbar__logo {
+  height:80px;
+  width:80px;
+}
+
+ul.navbar__links {
   height: 100%;
   align-items: center;
   gap: 15px;
@@ -39,7 +60,7 @@ ul.links {
   background-color: inherit;
 }
 
-ul.links a {
+ul.navbar__links a {
   text-decoration: none;
   color: white;
   font-size: 1.5rem;
@@ -98,7 +119,7 @@ ul.links a {
 @media screen and (max-width: 936px) {
 
     /* <ul> of navigation list items */
-    ul.links {
+    ul.navbar__links {
       position: absolute;
       top: -150%;
       width: 100%;
@@ -115,7 +136,7 @@ ul.links a {
       but leaflet map was higher, had to do a large number to override leaflet map */
     }
 
-    ul.links a, ul.links svg{
+    ul.navbar__links a, ul.navbar__links svg{
       font-size:1.5rem;
     }
 
@@ -130,14 +151,14 @@ ul.links a {
   }
 
   /* margin-right was prev auto to push it to left, set to 0 to make it centre */
-  .nav-logo {
+  .navbar-logo {
     margin-right: 0;
   }
 }
 
 /* progress icons on navbar */
 
-nav .status {
+nav .navbar__status {
   /* border-left: 3px double white; */
   border-radius: 3px;
 }
