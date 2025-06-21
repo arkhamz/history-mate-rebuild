@@ -66,9 +66,18 @@ export const historyMateApi = createApi({
     }),
 
     //battles
-    getAllUserBattles: builder.query<Battle[], string>({
-      query: (id) => ({
-        url: `/user-battles/${id}`,
+    getAllUserBattles: builder.query<Battle[], void>({
+      query: () => ({
+        url: `/user-battles`,
+        method: "GET",
+        credentials: "include",
+      }),
+      providesTags: ["Battle"],
+    }),
+
+    getUserBattle: builder.query<Battle, string>({
+      query: (battleId) => ({
+        url: `/user-battles/${battleId}`,
         method: "GET",
         credentials: "include",
       }),
@@ -80,10 +89,10 @@ export const historyMateApi = createApi({
         count: number;
         battles: Array<{ battle_id: number }>;
       },
-      string
+      void
     >({
-      query: (id) => ({
-        url: `/user-battles/count/${id}`,
+      query: () => ({
+        url: `/user-battles/count`,
         method: "GET",
         credentials: "include",
       }),
@@ -158,4 +167,5 @@ export const {
   useCheckAuthQuery,
   useGetBattleQuestionsAndAnswersQuery,
   useUpdateBattleMutation,
+  useGetUserBattleQuery,
 } = historyMateApi;

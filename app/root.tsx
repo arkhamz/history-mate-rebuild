@@ -51,6 +51,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
+export function HydrateFallback() {
+  return <Spinner />;
+}
+
 export default function App() {
   return (
     <Provider store={store}>

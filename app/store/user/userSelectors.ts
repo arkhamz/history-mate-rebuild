@@ -12,6 +12,6 @@ export function selectUserLoading(reduxState: RootState) {
   return reduxState.user.userLoading;
 }
 
-// export function selectUserBattles(reduxState: RootState) {
-//   return reduxState.user.userBattles;
-// }
+export function SelectAuthChecked(reduxState: RootState) {
+  return reduxState.user.authChecked;
+}

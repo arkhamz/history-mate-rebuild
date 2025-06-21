@@ -1,8 +1,5 @@
 // AuthLoader.tsx
-import {
-  useCheckAuthQuery,
-  useGetAllUserBattlesQuery,
-} from "~/services.ts/api";
+import { useCheckAuthQuery } from "~/services.ts/api";
 import { useEffect, type PropsWithChildren, type ReactNode } from "react";
 import { useDispatch } from "react-redux";
 import {
@@ -14,6 +11,7 @@ import {
 import Spinner from "../spinner/Spinner";
 import type { SerializedError } from "@reduxjs/toolkit";
 
+//wrap navbar component and react router Outlet
 export default function AuthLoader(props: PropsWithChildren) {
   const dispatch = useDispatch();
 
@@ -22,12 +20,6 @@ export default function AuthLoader(props: PropsWithChildren) {
     error: authError,
     isLoading: authIsLoading,
   } = useCheckAuthQuery();
-
-  // const {
-  //   data: battlesData,
-  //   isLoading: battlesLoading,
-  //   error: battlesError,
-  // } = useGetAllUserBattlesQuery(userId as string, { skip: !userId });
 
   useEffect(() => {
     //begin loading user
@@ -40,12 +32,6 @@ export default function AuthLoader(props: PropsWithChildren) {
       dispatch(SET_USER(authData)); // optional
     }
   }, [authData, dispatch, authError]);
-
-  // useEffect(() => {
-  //   // if (battlesData) {
-  //   //   dispatch(SET_BATTLES(battlesData)); // Save to Redux if needed#
-  //   // }
-  // }, [battlesData, dispatch]);
 
   if (authIsLoading) {
     return <Spinner />;

@@ -1,5 +1,5 @@
 import "./Navbar.css";
-import { useState, useEffect, type FormEvent } from "react";
+import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import navlogo from "../../assets/nav-logo.svg";
@@ -22,12 +22,12 @@ function Navbar() {
     data: battlesData,
     error: battleError,
     isLoading: battlesLoading,
-  } = useGetBattlesCountQuery(user?.userId ?? "", { skip: !user?.userId });
+  } = useGetBattlesCountQuery();
 
   const progress = battlesData?.battles
     ? Math.max(...battlesData.battles.map((b) => b.battle_id))
     : null;
-  const title = progress && progress > 0 ? titler(progress) : "";
+  // const title = progress && progress > 0 ? titler(progress) : "";
 
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -64,17 +64,12 @@ function Navbar() {
             }}
             className="navbar__logo"
             src={navlogo}
-            alt=""
+            alt="website-logo"
           />
         </div>
 
         <div className="navbar__main">
           <div className="navbar__user-info">
-            {/* {user && title ? (
-              <span className="username">
-                {`${title}`} {user.username}
-              </span>
-            ) : null} */}
             {user && progress ? (
               <div className="navbar__progress">
                 {statusIcons(progress).map(function (item, index, arr) {
@@ -85,9 +80,7 @@ function Navbar() {
           </div>
           <ul
             onClick={handleLinkClick}
-            className={
-              menuOpen ? "navbar__links links-active" : "navbar__links"
-            }
+            className={menuOpen ? "navbar__links menu-open" : "navbar__links"}
           >
             <NavLink to="/atlas">
               <FaGlobeEurope
@@ -107,16 +100,8 @@ function Navbar() {
           </ul>
         </div>
 
-        <div onClick={handleMenuClick} className="nav-toggler">
-          <Link className="menu-icon" to="#">
-            {menuOpen ? (
-              <i>{<AiOutlineClose />}</i>
-            ) : (
-              <i>
-                <AiOutlineMenu />
-              </i>
-            )}
-          </Link>
+        <div onClick={handleMenuClick} className="mobile-nav-toggler">
+          {menuOpen ? <AiOutlineClose /> : <AiOutlineMenu />}
         </div>
       </div>
     </nav>

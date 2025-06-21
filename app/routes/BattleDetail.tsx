@@ -1,8 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import {
   GiCannon,
-  GiPikeman,
   GiCalendar,
   GiFirstAidKit,
   GiPositionMarker,
@@ -13,24 +12,46 @@ import "./BattleDetail.css";
 import Quiz from "../components/quiz/Quiz";
 import SpringFade from "../components/spring-fade/springFade";
 import {
-  useGetAllUserBattlesQuery,
   useGetBattleQuestionsAndAnswersQuery,
+  useGetUserBattleQuery,
 } from "../services.ts/api";
-import type { Battle, QuestionData } from "../types/types";
-import { selectUser } from "~/store/user/userSelectors";
+import type { QuestionData } from "../types/types";
+import {
+  SelectAuthChecked,
+  selectUser,
+  selectUserLoading,
+} from "~/store/user/userSelectors";
 import { useEffect } from "react";
 import Spinner from "~/components/spinner/Spinner";
+import { BattleStatUnit } from "~/components/battle-stat-unit/BattleStatUnit";
 
 function BattleDetail() {
   const { id } = useParams();
+  const authChecked = useSelector(SelectAuthChecked);
   const user = useSelector(selectUser);
+  const userLoading = useSelector(selectUserLoading);
+
   const navigate = useNavigate();
 
   const {
-    data: battles,
-    isLoading,
+    data: battle,
+    isLoading: battleLoading,
     error,
-  } = useGetAllUserBattlesQuery(user?.userId ?? "", { skip: !user?.userId });
+  } = useGetUserBattleQuery(id || "", { skip: !id });
+
+  useEffect(() => {
+    //wait until auth check is completed
+    if (!authChecked) return;
+
+    if (!user) {
+      navigate("/login");
+    }
+
+    // Only redirect to /atlas if the query failed or the battle doesn't exist *after loading*
+    if (!battleLoading && error) {
+      navigate("/atlas");
+    }
+  }, [authChecked, user, battleLoading, error, navigate]);
 
   const {
     data: questionDataArr,
@@ -38,14 +59,7 @@ function BattleDetail() {
     error: questionDataError,
   } = useGetBattleQuestionsAndAnswersQuery(id ?? "1", { skip: !id });
 
-  const battle = battles?.find((i: Battle) => i.id == +id!);
-  useEffect(() => {
-    if (!user) {
-      navigate("/login");
-    } else if (!id || !battle) {
-      navigate("/atlas");
-    }
-  }, [user, id, battle, navigate]);
+  // const battle = battles?.find((i: Battle) => i.id == +id!);
 
   if (!battle || !user) {
     return <Spinner />;
@@ -125,84 +139,59 @@ function BattleDetail() {
         <div className="battle__statistics">
           {/* date - location - forces - casualties - guns */}
           {/* add location field to battles */}
+          <BattleStatUnit
+            iconComponent={GiCalendar}
+            title="DATE"
+            value={battle.date}
+          />
 
-          <div className="stat-unit">
-            <div className="stat-unit-icon">
-              <GiCalendar />
-            </div>
-            <div className="stat-unit-text">
-              <div className="stat-unit-title">DATE</div>
-              <div className="stat-unit-value">{battle.date}</div>
-            </div>
-          </div>
+          <BattleStatUnit
+            iconComponent={GiPositionMarker}
+            title="LOCATION"
+            value={battle.location}
+          />
 
-          <div className="stat-unit">
-            <div className="stat-unit-icon">
-              <GiPositionMarker />
-            </div>
-            <div className="stat-unit-text">
-              <div className="stat-unit-title">LOCATION</div>
-              <div className="stat-unit-value">{"place"}</div>
-            </div>
-          </div>
+          <BattleStatUnit
+            iconComponent={GiCannon}
+            title="GUNS"
+            value={`${
+              armyOneStrength.guns !== 0
+                ? ` ${armyOneStrength.guns}`
+                : "   unknown"
+            } vs ${
+              armyTwoStrength.guns !== 0
+                ? `   ${armyTwoStrength.guns}`
+                : "   unknown"
+            }`}
+          />
 
-          <div className="stat-unit">
-            <div className="stat-unit-icon">
-              {" "}
-              <GiCannon />
-            </div>
-            <div className="stat-unit-text">
-              <div className="stat-unit-title">GUNS</div>
-              <div className="stat-unit-value">
-                {armyOneStrength.guns !== 0
-                  ? ` ${armyOneStrength.guns}`
-                  : "   unknown"}{" "}
-                vs{" "}
-                {armyTwoStrength.guns !== 0
-                  ? `   ${armyTwoStrength.guns}`
-                  : "   unknown"}{" "}
-              </div>
-            </div>
-          </div>
+          <BattleStatUnit
+            iconComponent={GiFirstAidKit}
+            title="CASUALTIES"
+            value={`${armyOneCasualties || "Unknown"} vs ${
+              armyTwoCasualties || "Unknown"
+            }`}
+          />
 
-          <div className="stat-unit">
-            <div className="stat-unit-icon">
-              <GiFirstAidKit />{" "}
-            </div>
-            <div className="stat-unit-text">
-              <div className="stat-unit-title">CASUALTIES</div>
-              <div className="stat-unit-value">{`${
-                armyOneCasualties || "Unknown"
-              } vs ${armyTwoCasualties || "Unknown"} `}</div>
-            </div>
-          </div>
+          <BattleStatUnit
+            iconComponent={GiRallyTheTroops}
+            title="FORCES"
+            value={`${
+              armyOneStrength.number !== 0
+                ? ` ${armyOneStrength.number}`
+                : "   unknown"
+            } vs ${
+              armyTwoStrength.number !== 0
+                ? `   ${armyTwoStrength.number}`
+                : "   unknown"
+            }`}
+          />
 
-          <div className="stat-unit">
-            <div className="stat-unit-icon">
-              <GiRallyTheTroops />
-            </div>
-            <div className="stat-unit-text">
-              <div className="stat-unit-title">FORCES</div>
-              <div className="stat-unit-value">
-                {armyOneStrength.number !== 0
-                  ? ` ${armyOneStrength.number}`
-                  : "   unknown"}{" "}
-                vs{" "}
-                {armyTwoStrength.number !== 0
-                  ? `   ${armyTwoStrength.number}`
-                  : "   unknown"}{" "}
-              </div>
-            </div>
-          </div>
-          <div className="stat-unit">
-            <div className="stat-unit-icon">
-              <GiMagnifyingGlass />
-            </div>
-            <div className="stat-unit-text">
-              <div className="stat-unit-title">RESULT</div>
-              <div className="stat-unit-value">{battleResult}</div>
-            </div>
-          </div>
+          <BattleStatUnit
+            iconComponent={GiMagnifyingGlass}
+            title="RESULT"
+            value={battleResult}
+          />
         </div>
 
         <div className="battle__text-container">

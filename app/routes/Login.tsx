@@ -46,35 +46,41 @@ function Login() {
   }
 
   return (
-    <div className="login-container outer-wrapper">
-      <h1>Login</h1>
-      <form className="login-form" onSubmit={handleSubmit}>
-        <div className="login-username">
-          <label htmlFor="login-username">Username:</label>
-          <input
-            id="login-username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-            type="text"
-          />
-        </div>
-        <div className="listing-form-bedroom">
-          <label htmlFor="login-password">Password:</label>
-          <input
-            id="login-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            type="password"
-          />
+    <div className="login outer-wrapper">
+      <div className="login__inner-wrapper inner-wrapper ">
+        <div className="login__title">
+          <h1>Login</h1>
         </div>
 
-        <div className="login-form-button">
-          <button>Login</button>
-          {error ? <p>Signup failed</p> : null}
-        </div>
-      </form>
+        <form className="login__form" onSubmit={handleSubmit}>
+          <div className="login__input-wrapper">
+            <label htmlFor="login__username">Username:</label>
+            <input
+              id="login-username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+              type="text"
+            />
+          </div>
+
+          <div className="login__input-wrapper">
+            <label htmlFor="login-password">Password:</label>
+            <input
+              id="login-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              type="password"
+            />
+          </div>
+
+          <div className="login__button-wrapper">
+            <button className="primary">Login</button>
+            {error ? <p>Signup failed</p> : null}
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

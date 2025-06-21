@@ -27,6 +27,7 @@ export interface Battle {
   start_date: string;
   end_date: string;
   completed: boolean;
+  location: string;
 }
 
 export interface Army {

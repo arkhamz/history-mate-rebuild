@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router";
 import SpringFade from "../components/spring-fade/springFade";
 import "./Home.css";
-import Footer from "../components/footer/Footer";
 
 function Home() {
   const navigator = useNavigate();
@@ -25,7 +24,6 @@ function Home() {
           </div>
         </SpringFade>
       </div>
-      <Footer />
     </>
   );
 }

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import "./Quiz.css";
-import { useDispatch } from "react-redux";
 import { TiTickOutline } from "react-icons/ti";
 import {
   useUnlockNextBattleMutation,
@@ -26,13 +25,8 @@ export default function Quiz({
   ] = useUpdateBattleMutation();
 
   const [current, setCurrent] = useState(0);
-  //current will act as questions index, represents question user is on
-  // current will be increased by one whenever an answer button is clicked
-  //e.g. starts with 1st question visible, then moves to next question
-  //since we are looping through array of questions
+  //current = currentQuestionIndex
   const [score, setScore] = useState(0);
-  const [unlocked, setUnlocked] = useState(false);
-  const dispatch = useDispatch();
 
   function handleClick(answer: boolean) {
     // If answer is true, increase score. As long as score is not equal to 2
@@ -48,14 +42,12 @@ export default function Quiz({
   }
 
   async function unlockNextBattleFn() {
-    //battle.completed = true
+    //set battle.completed = true
     const updateResult = await updateBattle({
       user_id: uid,
       battle_id: battleId,
       completed: true,
     }).unwrap();
-
-    console.log("updateResult - ", updateResult);
 
     //unlock next battle
     const unlockResult = await unlockNextBattle({
@@ -63,8 +55,6 @@ export default function Quiz({
       battle_id: battleId,
       completed: true,
     }).unwrap();
-
-    console.log("unlockResult - ", unlockResult);
   }
 
   useEffect(
@@ -81,44 +71,30 @@ export default function Quiz({
   return (
     <>
       {questionDataArr?.length && score < 2 ? (
-        <div className="questions-container">
-          <div className="questions-">
-            <div className="score">Score: {score}</div>
+        <div className="questions outer-wrapper">
+          <div className="questions__inner-wrapper inner-wrapper">
+            <div className="question__answers-container">
+              <div>
+                <h3 className="question-text">
+                  {questionDataArr[current].question.text}{" "}
+                  {`(${current + 1} / ${questionDataArr.length})`}
+                </h3>
+              </div>
 
-            <div className="question-count">
-              {/* <span>Question {current + 1}</span> / {questions.length} */}
-              <h2>
-                Question {current + 1} / {questionDataArr.length}{" "}
-              </h2>
+              <div className="question__answers">
+                {questionDataArr[current].answers.map(function (answ, i) {
+                  return (
+                    <button
+                      className="answer-btn"
+                      key={i}
+                      onClick={() => handleClick(answ.is_correct)}
+                    >
+                      {answ.answer_text}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
-
-            <div className="question-text">
-              <h3>{questionDataArr[current].question.text}</h3>
-            </div>
-
-            <div className="score-icon">
-              {score === 1 && <i>{<TiTickOutline />}</i>}
-              {score === 2 && (
-                <>
-                  <i>{<TiTickOutline />}</i>
-                  <i>{<TiTickOutline />}</i>
-                </>
-              )}
-            </div>
-          </div>
-
-          <div className="answer-section">
-            {questionDataArr[current].answers.map(function (answ, i) {
-              return (
-                <button
-                  className="answer-btn"
-                  key={i}
-                  onClick={() => handleClick(answ.is_correct)}
-                >
-                  {answ.answer_text}
-                </button>
-              );
-            })}
           </div>
         </div>
       ) : null}

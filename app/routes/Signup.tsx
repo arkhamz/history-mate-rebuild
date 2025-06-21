@@ -31,9 +31,6 @@ function Signup() {
         username: result.username,
         userId: result.userId,
       };
-
-      console.log("signup data", userData);
-
       //update state
       dispatch(LOGIN(userData));
       //clear fields
@@ -48,39 +45,43 @@ function Signup() {
   }
 
   return (
-    <div className="signup-container outer-wrapper">
-      <form className="signup-form" onSubmit={handleSubmit}>
-        <h1 className="signup-title">Create an Account</h1>
+    <div className="signup outer-wrapper">
+      <div className="signup__inner-wrapper inner-wrapper">
+        <div className="signup__title">
+          <h1 className="signup-title">Create an Account</h1>
+        </div>
+        <form className="signup__form" onSubmit={handleSubmit}>
+          <div className="signup__input-wrapper">
+            <label htmlFor="signup-username">Username:</label>
+            <input
+              id="signup-username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+              type="text"
+            />
+          </div>
 
-        <div className="signup-username">
-          <label htmlFor="signup-username">Username:</label>
-          <input
-            id="signup-username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-            type="text"
-          />
-        </div>
-        <div className="listing-form-bedroom">
-          <label htmlFor="signup-password">Password:</label>
-          <input
-            id="signup-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            type="password"
-          />
-        </div>
+          <div className="signup__input-wrapper">
+            <label htmlFor="signup-password">Password:</label>
+            <input
+              id="signup-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              type="password"
+            />
+          </div>
 
-        <div className="signup-form-button">
-          <button>Signup</button>
-          {error ? <p>Signup failed</p> : null}
-          <Link to="/login">
-            Already have an account? <span>Login</span>
-          </Link>
-        </div>
-      </form>
+          <div className="signup__button-wrapper">
+            <button className="primary">Signup</button>
+            {error ? <p>Signup failed</p> : null}
+            <Link to="/login">
+              Already have an account? <span>Login</span>
+            </Link>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

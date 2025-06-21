@@ -1,16 +1,16 @@
-nav {
+.navbar {
   display: flex;
   width: 100%;
   background-color: #2b2a2a;
-  box-shadow: 0 3px 5px 10px rgb(0 0 0 / 50%);
+  box-shadow: 0 3px 5px 10px rgb(0 0 0 / 50%);  
 }
 
 .navbar__inner-wrapper{
   width:100%;
   max-width:unset;
-  padding:unset;
   padding: 0px 40px;
   display:flex;
+  position:relative;
 }
 
 .navbar__user-info{
@@ -42,15 +42,17 @@ nav button:hover{
 }
 
 .navbar__logo-container{
-
+position:relative;
+z-index:4000001
 }
+
 
 .navbar__logo {
   height:80px;
   width:80px;
 }
 
-ul.navbar__links {
+.navbar__links {
   height: 100%;
   align-items: center;
   gap: 15px;
@@ -60,7 +62,12 @@ ul.navbar__links {
   background-color: inherit;
 }
 
-ul.navbar__links a {
+/* modifier class only for mobile */
+.navbar__links.menu-open {
+  top: 0%;
+}
+
+.navbar__links a {
   text-decoration: none;
   color: white;
   font-size: 1.5rem;
@@ -76,14 +83,11 @@ ul.navbar__links a {
 }
 
 
-.user-name{
-  color: white;
-}
-
 /* active class for <NavLInk> component */
 .active{
   border-bottom: 2px solid white;
 }
+
 /* progress icons */
 .status-light {
   color: white;
@@ -91,37 +95,30 @@ ul.navbar__links a {
   transition: color 300ms ease-in-out;
 }
 
+/* -------------------collapsible navbar code-------------- 
 
-
-/* -------------------collapsible navbar code-------------- */
-
-/* div containing menu icons  */
-.nav-toggler {
+<ul> is up and away at movile
+click icon in mobile-nav-toggler, sets menuOpen=true
+<ul> gets menu-open class which brings the <ul> down
+*/
+.mobile-nav-toggler {
   display: none;
   margin-left: 2rem;
 }
-/* <Link> containing the icon */
-.menu-icon {
-  margin-top: 10px;
-  font-size: 3rem;
-  text-decoration: none;
-  color: white;
+
+.mobile-nav-toggler svg{
+  height:40px;
+  width:40px;
+  fill:white;
 }
 
-/* ul with links & links-active class, when button is toggled/menuOPen =  true */
-.links.links-active {
-  top: 0%;
-}
-
-/* when menuOPen is true, this class sets media query ul.links top from -100 (
-  (above screen) to 0 (at top of screen) */
-
-@media screen and (max-width: 936px) {
+@media screen and (max-width: 600px) {
 
     /* <ul> of navigation list items */
-    ul.navbar__links {
+    .navbar__links {
       position: absolute;
-      top: -150%;
+      top: -100vh;
+      left:0;
       width: 100%;
       height: 100vh;
       display: flex;
@@ -132,37 +129,17 @@ ul.navbar__links a {
       transition: 450ms ease-in-out;
       background-color: #2b2a2a;
       z-index: 4000000;
-      /* high Z index needed to show over everything, had 4000 previously
-      but leaflet map was higher, had to do a large number to override leaflet map */
+      /* high Z index due to override leaflet map's extreme z-index  */
     }
 
-    ul.navbar__links a, ul.navbar__links svg{
-      font-size:1.5rem;
-    }
-
-  /* normally hidden div - contains menu icons */
-  .nav-toggler {
+  /* reveal toggler with menu icons hidden*/
+  .mobile-nav-toggler {
     display: block;
     position: absolute;
-    left: 2%;
+    right:10px;
+    top:50%;
+    transform:translateY(-50%);
     z-index: 4000000;
-    /* makes div visible, and the icons inside.
-    is fixed on screen, 3% from the left of viewport */
-  }
-
-  /* margin-right was prev auto to push it to left, set to 0 to make it centre */
-  .navbar-logo {
-    margin-right: 0;
+   
   }
 }
-
-/* progress icons on navbar */
-
-nav .navbar__status {
-  /* border-left: 3px double white; */
-  border-radius: 3px;
-}
-
-
-
-
