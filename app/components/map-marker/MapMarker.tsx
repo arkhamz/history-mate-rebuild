@@ -24,17 +24,16 @@ function createPulseDivIcon() {
   });
 }
 
-interface PulsingMarkerProps extends PropsWithChildren {
+interface PulsingMarkerProps {
   battle: Battle;
   battleIndex: number;
-  battleArr: Battle[];
+  unlockedBattles: number;
 }
 
 export default function MapMarker({
   battle,
   battleIndex,
-  battleArr,
-  children,
+  unlockedBattles,
 }: PulsingMarkerProps) {
   const pulsingIcon = createPulseDivIcon();
   const navigate = useNavigate();
@@ -43,10 +42,10 @@ export default function MapMarker({
     iconUrl: gunIcon,
     iconSize: [60, 60],
     iconAnchor: [12, 41],
-    className: battleIndex === battleArr.length - 1 ? "recents" : "",
+    className: battleIndex === unlockedBattles ? "recents" : "",
   });
 
-  const showPulse = battleIndex === battleArr.length - 1;
+  const showPulse = battleIndex === unlockedBattles;
 
   const customIcon = showPulse ? pulsingIcon : baseIcon;
 
@@ -55,7 +54,6 @@ export default function MapMarker({
       position={[battle.latitude, battle.longitude]}
       icon={customIcon}
       eventHandlers={{
-        // mouseover: (event) => event.target.openPopup(),
         click: (event) => navigate(`/battles/${battle.id}`),
       }}
     >

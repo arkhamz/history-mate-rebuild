@@ -51,6 +51,11 @@ export default function Quiz({
       completed: true,
     }).unwrap();
 
+    if (battleId == 12) {
+      dispatch(SET_MESSAGE("Unlocked: New video"));
+      return;
+    }
+
     //unlock next battle
     const unlockResult = await unlockNextBattle({
       user_id: uid,
@@ -58,18 +63,12 @@ export default function Quiz({
       completed: true,
     }).unwrap();
 
-    if (unlockResult?.insertedId) {
-      if (score == 12) {
-        dispatch(SET_MESSAGE("Unlocked: New video"));
-      } else {
-        dispatch(SET_MESSAGE("Unlocked: New video & battle"));
-      }
-    }
+    dispatch(SET_MESSAGE("Unlocked: New video & battle"));
   }
 
   useEffect(
     function () {
-      if (score === 2 && !isSuccess && battleId != 12) {
+      if (score === 2 && !isSuccess) {
         //unlock next battle & update completed status
         completeBattle();
       }

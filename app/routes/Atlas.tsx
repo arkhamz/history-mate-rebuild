@@ -19,6 +19,8 @@ function Atlas() {
 
   const { data: battles, isLoading, error } = useGetAllUserBattlesQuery();
 
+  const unlockedBattles = battles?.length ?? 0;
+
   useEffect(() => {
     if (!user && !userLoading) {
       navigate("/login");
@@ -51,8 +53,8 @@ function Atlas() {
                 <MapMarker
                   key={item.id}
                   battle={item}
-                  battleIndex={index}
-                  battleArr={arr}
+                  battleIndex={item.id}
+                  unlockedBattles={unlockedBattles}
                 />
               );
 

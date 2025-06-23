@@ -1,35 +1,3 @@
-/* .map-marker-wrapper {
-  position: relative;
-  width: 60px;
-  height: 60px;
-  pointer-events: none;
-}
-
-.marker-icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 30px;
-  height: 30px;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  pointer-events: auto;
-}
-
-.pulse-ring {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: white;
-  opacity: 0.4;
-  transform-origin: center center;
-  pointer-events: none;
-  transform: translate(-50%, -50%) scale(1);
-  z-index: 1;
-} */
 
 .custom-pulse-icon .pulse-ring {
   position: absolute;
