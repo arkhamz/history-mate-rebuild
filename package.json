@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@netlify/vite-plugin-react-router": "^1.0.1",
-    "@react-router/dev": "^7.5.3",
+    "@react-router/dev": "^7.6.2",
     "@tailwindcss/vite": "^4.1.4",
     "@types/leaflet": "^1.9.18",
     "@types/node": "^20",
