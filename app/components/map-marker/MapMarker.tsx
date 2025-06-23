@@ -3,7 +3,7 @@ import { Icon } from "leaflet";
 import { useEffect, useRef, type PropsWithChildren } from "react";
 import { motion } from "framer-motion";
 import "./MapMarker.css";
-import gunIcon from "../../assets/gun2.svg";
+import gunIcon from "../../assets/gun.svg";
 import type { Battle } from "~/types/types";
 import { DivIcon } from "leaflet";
 import { useNavigate } from "react-router";
