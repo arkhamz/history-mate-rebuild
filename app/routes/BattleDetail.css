@@ -156,6 +156,7 @@ border-bottom:1px solid whitesmoke;
 @media (max-width:600px){
   .battle__belligerents{
     flex-direction: column;
+    gap:16px;
   }
 
   .battle__image-container{
@@ -179,4 +180,9 @@ border-bottom:1px solid whitesmoke;
   .stat-unit-title{
     display:none;
   }
+
+  .battle__video-container iframe{
+   height:320px;
+}
+
 }
