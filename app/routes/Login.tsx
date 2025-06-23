@@ -41,7 +41,6 @@ function Login() {
       navigator("/atlas");
     } catch (error) {
       console.error(error);
-      dispatch(SET_MESSAGE("Signup failed, please try again later."));
     }
   }
 
@@ -56,6 +55,7 @@ function Login() {
           <div className="login__input-wrapper">
             <label htmlFor="login__username">Username:</label>
             <input
+              autoComplete="false"
               id="login-username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -77,7 +77,7 @@ function Login() {
 
           <div className="login__button-wrapper">
             <button className="primary">Login</button>
-            {error ? <p>Signup failed</p> : null}
+            {error ? <p>Login error</p> : null}
           </div>
         </form>
       </div>

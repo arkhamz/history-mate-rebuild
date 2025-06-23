@@ -21,7 +21,7 @@ export const historyMateApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Battle"],
+  tagTypes: ["Battle", "Count"],
   endpoints: (builder) => ({
     //define multiple endpoints in this slice
 
@@ -36,6 +36,7 @@ export const historyMateApi = createApi({
         body: body,
         credentials: "include",
       }),
+      invalidatesTags: ["Battle"],
     }),
     login: builder.mutation<
       AuthenticatedUser,
@@ -96,11 +97,11 @@ export const historyMateApi = createApi({
         method: "GET",
         credentials: "include",
       }),
-      providesTags: ["Battle"],
+      providesTags: ["Count", "Battle"],
     }),
 
     unlockNextBattle: builder.mutation<
-      string,
+      { insertedId: string },
       { user_id: string; battle_id: number; completed: boolean }
     >({
       query: (body) => ({
@@ -113,7 +114,7 @@ export const historyMateApi = createApi({
     }),
 
     updateBattle: builder.mutation<
-      string,
+      { insertedId: string },
       { user_id: string; battle_id: number; completed: boolean }
     >({
       query: (body) => ({

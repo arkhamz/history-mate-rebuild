@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import {
   GiCannon,
@@ -20,13 +20,11 @@ import { SelectAuthChecked, selectUser } from "~/store/user/userSelectors";
 import { useEffect } from "react";
 import Spinner from "~/components/spinner/Spinner";
 import { BattleStatUnit } from "~/components/battle-stat-unit/BattleStatUnit";
-import { CLEAR_MESSAGE, SET_MESSAGE } from "~/store/appState/appStateSlice";
 
 function BattleDetail() {
   const { id } = useParams();
   const authChecked = useSelector(SelectAuthChecked);
   const user = useSelector(selectUser);
-  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 

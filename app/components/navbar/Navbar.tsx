@@ -1,18 +1,17 @@
 import "./Navbar.css";
 import { useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router";
+import { NavLink } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import navlogo from "../../assets/nav-logo.svg";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { FaGlobeEurope } from "react-icons/fa";
 import { useGetBattlesCountQuery, useLogoutMutation } from "~/services.ts/api";
-import { statusIcons, titler } from "utils";
+import { statusIcons } from "utils";
 import { selectUser } from "~/store/user/userSelectors";
 import { LOGOUT } from "~/store/user/userSlice";
 
 function Navbar() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const user = useSelector(selectUser);
 
   const [logout, { isLoading: logoutIsLoading, error: logoutError }] =
@@ -44,7 +43,7 @@ function Navbar() {
     setMenuOpen(!menuOpen);
   }
 
-  // Code for closing the collapsible <ul> when you click on a link OR LOGOUT BUTTON
+  // Closes collapsible <ul> when you click on link/logout
   function handleLinkClick(e: React.MouseEvent<HTMLUListElement>) {
     const element = e.target as HTMLElement;
     if (element.tagName === "A" || element.tagName === "BUTTON") {
@@ -58,14 +57,7 @@ function Navbar() {
     <nav className="navbar outer-wrapper">
       <div className="navbar__inner-wrapper inner-wrapper">
         <div className="navbar__logo-container">
-          <img
-            onClick={(e) => {
-              user && navigate("/");
-            }}
-            className="navbar__logo"
-            src={navlogo}
-            alt="website-logo"
-          />
+          <img className="navbar__logo" src={navlogo} alt="website-logo" />
         </div>
 
         <div className="navbar__main">

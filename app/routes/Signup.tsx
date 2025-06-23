@@ -59,6 +59,7 @@ function Signup() {
               onChange={(e) => setUsername(e.target.value)}
               required
               type="text"
+              autoComplete="false"
             />
           </div>
 

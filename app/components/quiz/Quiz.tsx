@@ -4,7 +4,7 @@ import {
   useUnlockNextBattleMutation,
   useUpdateBattleMutation,
 } from "../../services.ts/api";
-import type { Question, QuestionData } from "../../types/types";
+import type { QuestionData } from "../../types/types";
 import { useDispatch } from "react-redux";
 import { SET_MESSAGE } from "~/store/appState/appStateSlice";
 
@@ -57,6 +57,14 @@ export default function Quiz({
       battle_id: battleId,
       completed: true,
     }).unwrap();
+
+    if (unlockResult?.insertedId) {
+      if (score == 12) {
+        dispatch(SET_MESSAGE("Unlocked: New video"));
+      } else {
+        dispatch(SET_MESSAGE("Unlocked: New video & battle"));
+      }
+    }
   }
 
   useEffect(
@@ -64,10 +72,6 @@ export default function Quiz({
       if (score === 2 && !isSuccess && battleId != 12) {
         //unlock next battle & update completed status
         completeBattle();
-      }
-
-      if (score === 2 && isSuccess) {
-        dispatch(SET_MESSAGE("Unlocked: New video & battle"));
       }
     },
     [score, isSuccess]
