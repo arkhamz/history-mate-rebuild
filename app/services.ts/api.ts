@@ -16,7 +16,7 @@ export const historyMateApi = createApi({
   reducerPath: "api",
 
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:4000",
+    baseUrl: process.env.API_BASE_URL,
     prepareHeaders(headers) {
       return headers;
     },
