@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import SpringFade from "../components/spring-fade/SpringFade";
+import SpringFade from "~/components/spring-fade/SpringFade";
 import "./Home.css";
 
 function Home() {
