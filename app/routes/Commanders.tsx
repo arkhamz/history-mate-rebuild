@@ -1,9 +1,7 @@
 import "./Commanders.css";
-import { Carousel } from "~/components/carousel/Carousel";
 
 import CommanderCard from "../components/commander-card/commanderCard";
 import { useGetAllCommandersQuery } from "~/services.ts/api";
-import type { Commander } from "~/types/types";
 
 function Commanders() {
   const { data: commanders, isLoading, error } = useGetAllCommandersQuery();

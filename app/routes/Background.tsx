@@ -1,4 +1,4 @@
-import SpringFade from "~/components/spring-fade/springFade";
+import SpringFade from "~/components/spring-fade/SpringFade";
 import "./Background.css";
 
 function Background() {

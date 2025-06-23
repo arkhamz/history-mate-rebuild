@@ -1,6 +1,5 @@
 import { useParams, Navigate, useNavigate } from "react-router";
 import "./CommanderDetail.css";
-import SpringFade from "../components/spring-fade/springFade";
 import { useGetAllCommandersQuery } from "~/services.ts/api";
 import type { Commander } from "~/types/types";
 import { reverseDate } from "utils";

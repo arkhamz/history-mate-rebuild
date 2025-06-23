@@ -10,7 +10,7 @@ import {
 } from "react-icons/gi";
 import "./BattleDetail.css";
 import Quiz from "../components/quiz/Quiz";
-import SpringFade from "../components/spring-fade/springFade";
+import SpringFade from "../components/spring-fade/SpringFade";
 import {
   useGetBattleQuestionsAndAnswersQuery,
   useGetUserBattleQuery,
