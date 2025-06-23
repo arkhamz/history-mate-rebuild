@@ -1,7 +1,6 @@
 .commander-detail__container{
     display:flex;
     justify-content: center;
-    
 }
 
 .commander-detail__inner-wrapper{
@@ -10,14 +9,12 @@
 }
 
 .commander-detail__image-stats{
-    flex:1;
    display:flex;
    flex-direction: column;
    gap:32px;
 }
 
 .commander-detail__name-biography{
-    flex:1;
     display:flex;
     flex-direction:column;
     gap:24px;
@@ -26,11 +23,6 @@
 /* name */
 .commander-detail__title h1{
     font-size:50px
-}
-
-/* title */
-.commander-detail__title p{
-
 }
 
 .commander-detail__image-container{
@@ -46,28 +38,40 @@ object-position: top center;
     width:100%;
     object-fit: cover;
 position:absolute;
-
 }
 
 .commander-detail__statistics{
 display:flex;
-flex-direction: column;
+justify-content: center;
 gap:16px;
+margin-bottom:40px;
 }
 
 .commander-detail__stat-unit{
-    
+    display:flex;
+    gap:2px;
 }
 .commander-detail__stat-title{
     font-weight:500;
     font-size:24px;
 }
-.commander-detail__stat-data{}
-
 
 .commander-detail__biography{
     display:flex;
     flex-direction:column;
     gap:8px;
+    text-align: justify;
 }
 
+
+@media (max-width:600px){
+    .commander-detail__statistics{
+        flex-wrap:wrap;
+        justify-content: flex-start;
+        margin-bottom:20px;
+    }
+
+    .commander-detail__image-container{
+        height:250px;
+    }
+}
