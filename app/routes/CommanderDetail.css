@@ -20,6 +20,11 @@
     gap:24px;
 }
 
+
+.commander-detail__title{
+    text-align: center;
+}
+
 /* name */
 .commander-detail__title h1{
     font-size:50px
@@ -29,6 +34,8 @@
 position:relative;
 overflow:hidden;
 height:400px;
+width:70%;
+align-self:center;
 }
 
 .commander-detail__image-container img{
@@ -73,5 +80,6 @@ margin-bottom:40px;
 
     .commander-detail__image-container{
         height:250px;
+        width:100%;
     }
 }
