@@ -47,7 +47,7 @@ label{
 
 h1{
     font-size:60px;
-    color:wh
+    color:white;
 }
 
 button{
@@ -84,5 +84,9 @@ button.primary:hover{
   @media (max-width:600px){
     .inner-wrapper{
       padding:40px 16px;
+    }
+
+    h1{
+      font-size:36px;
     }
   }

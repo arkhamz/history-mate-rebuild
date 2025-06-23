@@ -1,7 +1,5 @@
 /* medieval font? */
-@import url("https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap");
-
-
+/* @import url("https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap"); */
 
 .battle__container {
   width: 100%;
@@ -10,7 +8,6 @@ color:white;
   background-size: cover;
   display:flex;
   justify-content:center;
-
 }
 
 .battle__container .inner-wrapper{
@@ -19,7 +16,6 @@ color:white;
 flex-direction:column;
 align-items:center;
 max-width:1000px;
-
 }
 
 .battle__title{
@@ -39,18 +35,11 @@ max-width:1000px;
   margin-bottom:20px;
 }
 
-.beligerents-1 {
-  display: flex;
-flex-direction:column;
-gap:8px;
-}
-
-.beligerents-2 {
+.belligerent__container {
   display: flex;
   gap:8px;
 flex-direction:column;
 }
-
 
  .commander{
   display:flex;
@@ -70,10 +59,8 @@ flex-direction:column;
 .battle__image-container{
   position:relative;
   height:400px;
-  /* height: 300px; */
   width:70%;
   margin-bottom:20px;
-
 }
 
 .battle__image-container .battle-pic {
@@ -90,7 +77,6 @@ flex-direction:column;
   display:grid;
   grid-template-columns:50% 50%;
   row-gap:16px;
-
 }
 
 .stat-unit{
@@ -100,17 +86,9 @@ align-items: center;
 border-bottom:1px solid whitesmoke;
 }
 
-.stat-unit-icon{
-  
-}
-
 .stat-unit-icon svg{
   height:40px;
   width:40px;
-}
-
-.stat-unit-text{
-
 }
 
 .stat-unit-title{
@@ -119,24 +97,13 @@ border-bottom:1px solid whitesmoke;
 
 .stat-unit-value{font-size:20px;}
 
-.battle__result{}
-
 .battle__text-container h2{
   margin-bottom:8px;
-
 }
 
-.battle__prelude{
-
-}
-
-.battle__text{
-
-}
 
 .battle__extras-container{
   width:100%;
-
 }
 
 .battle__video-container{
@@ -144,17 +111,13 @@ border-bottom:1px solid whitesmoke;
 }
 
 .battle__video-container iframe{
-
    width:100%;
-  /* max-width:100%; */
 }
 
 
 .battle-result {
   text-align: center;
 }
-
-
 
 /* div containing prelude and description divs of header and paragraph */
 .battle-detail {
@@ -187,7 +150,33 @@ border-bottom:1px solid whitesmoke;
   margin: 20px 0;
   justify-self: center;
   align-self: flex-start;
-  width: 40vw;
 }
 
 
+@media (max-width:600px){
+  .battle__belligerents{
+    flex-direction: column;
+  }
+
+  .battle__image-container{
+    height:200px;
+    width:100%;
+  }
+
+  .battle__statistics{
+    grid-template-columns:1fr;
+  }
+
+  .stat-unit-icon svg{
+    width:30px;
+    height:30px;
+  }
+
+  .stat-unit-value{
+    font-size:16px;
+  }
+
+  .stat-unit-title{
+    display:none;
+  }
+}

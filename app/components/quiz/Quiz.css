@@ -15,8 +15,6 @@
   gap:16px;
 }
 
-.question__text{}
-
 .question__answers-container {
   display: flex;
   flex-direction: column;

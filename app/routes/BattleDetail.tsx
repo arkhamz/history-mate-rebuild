@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import {
   GiCannon,
@@ -16,20 +16,17 @@ import {
   useGetUserBattleQuery,
 } from "../services.ts/api";
 import type { QuestionData } from "../types/types";
-import {
-  SelectAuthChecked,
-  selectUser,
-  selectUserLoading,
-} from "~/store/user/userSelectors";
+import { SelectAuthChecked, selectUser } from "~/store/user/userSelectors";
 import { useEffect } from "react";
 import Spinner from "~/components/spinner/Spinner";
 import { BattleStatUnit } from "~/components/battle-stat-unit/BattleStatUnit";
+import { CLEAR_MESSAGE, SET_MESSAGE } from "~/store/appState/appStateSlice";
 
 function BattleDetail() {
   const { id } = useParams();
   const authChecked = useSelector(SelectAuthChecked);
   const user = useSelector(selectUser);
-  const userLoading = useSelector(selectUserLoading);
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
@@ -46,7 +43,6 @@ function BattleDetail() {
     if (!user) {
       navigate("/login");
     }
-
     // Only redirect to /atlas if the query failed or the battle doesn't exist *after loading*
     if (!battleLoading && error) {
       navigate("/atlas");
@@ -58,8 +54,6 @@ function BattleDetail() {
     isLoading: questionDataLoading,
     error: questionDataError,
   } = useGetBattleQuestionsAndAnswersQuery(id ?? "1", { skip: !id });
-
-  // const battle = battles?.find((i: Battle) => i.id == +id!);
 
   if (!battle || !user) {
     return <Spinner />;
@@ -75,10 +69,6 @@ function BattleDetail() {
     "killed and wounded",
     ""
   );
-  const battlePrelude = battle.prelude;
-  const battleDescription = battle.description;
-  const battleResult = battle && battle.result;
-  const battleTitle = battle && battle.name;
   const battleDate = battle.date ? `- ${battle.date}` : "";
 
   return (
@@ -86,14 +76,14 @@ function BattleDetail() {
       <div className="inner-wrapper">
         <div className="battle__title">
           <h1>
-            {battleTitle.startsWith("Siege")
-              ? `${battleTitle} ${battleDate}`
-              : `Battle of ${battleTitle}`}
+            {battle.name.startsWith("Siege")
+              ? `${battle.name} ${battleDate}`
+              : `Battle of ${battle.name}`}
           </h1>
         </div>
 
         <div className="battle__belligerents">
-          <div className="beligerents-1">
+          <div className="belligerent__container">
             <h2>Commanders</h2>
             {battle.army_one.commanders.map(function (item, i) {
               return (
@@ -109,7 +99,7 @@ function BattleDetail() {
               );
             })}
           </div>
-          <div className="beligerents-2">
+          <div className="belligerent__container">
             <h2>Commanders</h2>
             {battle.army_two.commanders.map(function (item, i) {
               return (
@@ -190,7 +180,7 @@ function BattleDetail() {
           <BattleStatUnit
             iconComponent={GiMagnifyingGlass}
             title="RESULT"
-            value={battleResult}
+            value={battle.result}
           />
         </div>
 
@@ -199,7 +189,7 @@ function BattleDetail() {
             <SpringFade>
               <div className="prelude">
                 <h2>Prelude</h2>
-                <p>{battlePrelude}</p>
+                <p>{battle.prelude}</p>
               </div>
             </SpringFade>
           </div>
@@ -207,7 +197,7 @@ function BattleDetail() {
             <SpringFade>
               <div className="description">
                 <h2>Battle</h2>
-                <p>{battleDescription}</p>
+                <p>{battle.description}</p>
               </div>
             </SpringFade>
           </div>

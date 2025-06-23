@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import "./Quiz.css";
-import { TiTickOutline } from "react-icons/ti";
 import {
   useUnlockNextBattleMutation,
   useUpdateBattleMutation,
 } from "../../services.ts/api";
 import type { Question, QuestionData } from "../../types/types";
+import { useDispatch } from "react-redux";
+import { SET_MESSAGE } from "~/store/appState/appStateSlice";
 
 export default function Quiz({
   questionDataArr,
@@ -16,7 +17,8 @@ export default function Quiz({
   uid: string;
   battleId: number;
 }) {
-  const [unlockNextBattle, { isLoading, error }] =
+  const dispatch = useDispatch();
+  const [unlockNextBattle, { isLoading, error, isSuccess }] =
     useUnlockNextBattleMutation();
 
   const [
@@ -41,7 +43,7 @@ export default function Quiz({
     }
   }
 
-  async function unlockNextBattleFn() {
+  async function completeBattle() {
     //set battle.completed = true
     const updateResult = await updateBattle({
       user_id: uid,
@@ -59,13 +61,16 @@ export default function Quiz({
 
   useEffect(
     function () {
-      // only unlock the next battle if battleId is not currently 12, i.e. last battle
-      if (score === 2) {
-        //unlock next battle
-        unlockNextBattleFn();
+      if (score === 2 && !isSuccess && battleId != 12) {
+        //unlock next battle & update completed status
+        completeBattle();
+      }
+
+      if (score === 2 && isSuccess) {
+        dispatch(SET_MESSAGE("Unlocked: New video & battle"));
       }
     },
-    [score]
+    [score, isSuccess]
   );
 
   return (
@@ -85,7 +90,7 @@ export default function Quiz({
                 {questionDataArr[current].answers.map(function (answ, i) {
                   return (
                     <button
-                      className="answer-btn"
+                      className="primary"
                       key={i}
                       onClick={() => handleClick(answ.is_correct)}
                     >

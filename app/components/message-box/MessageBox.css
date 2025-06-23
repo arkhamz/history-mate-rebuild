@@ -3,8 +3,8 @@
     align-items: center;
     justify-content: center;
     position: fixed;
-    min-width: 30vw;
-    height: 7vh;
+    min-width: 300px;
+    padding: 10px 24px;
     top: -100%;
     left: 38%;
     border-radius: 6px;
@@ -13,8 +13,7 @@
     font-size: large;
     transition: top 500ms ease-in-out;
     box-shadow:0 0 15px 5px #ccc;
-    background-color:#ebebeb;
-    color:black;
+    background-color:white;
 
     animation-name: message;
     animation-timing-function: ease-in-out;
@@ -23,6 +22,9 @@
     animation-duration: 850ms;
 }
 
+.message-box p{
+    color:black;
+}
 
 .message-box.message-active{
     top: 40%;
@@ -30,10 +32,8 @@
 }
 
 @keyframes message {
-
     0%{ transform:scale(1)}
-    100%{transform:scale(1.1)}
-    
+    100%{transform:scale(1.1)} 
 }
 
 

@@ -95,7 +95,9 @@ function Navbar() {
             {!user ? (
               <NavLink to="/login">Login</NavLink>
             ) : (
-              <button onClick={() => handleClick()}>Logout</button>
+              <button className="primary" onClick={() => handleClick()}>
+                Logout
+              </button>
             )}
           </ul>
         </div>

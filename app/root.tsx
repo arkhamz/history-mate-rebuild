@@ -19,6 +19,7 @@ import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
 import Spinner from "./components/spinner/Spinner";
 import AuthLoader from "./components/auth-loader/AuthLoader";
+import MessageBox from "./components/message-box/MessageBox";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -59,6 +60,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <AuthLoader>
+        <MessageBox />
         <Navbar />
         <Outlet />
         {/* <Footer /> */}
