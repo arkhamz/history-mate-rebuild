@@ -1,10 +1,5 @@
 import { Link } from "react-router";
 import "./Footer.css";
-import {
-  AiFillFacebook,
-  AiFillTwitterCircle,
-  AiFillInstagram,
-} from "react-icons/ai";
 
 export default function Footer() {
   return (
