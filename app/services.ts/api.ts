@@ -7,6 +7,7 @@ import type {
   User,
 } from "../types/types";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 //have 1 API slice per base URL that your app needs to communicate with
 //E.g. if your site fetches data from /api/posts and /api/ users, have
 //a single api slice with /api/ as the base url and separate endpoint definitions for post and users
@@ -14,9 +15,8 @@ import type {
 // Define a service (api slice) using a base URL and expected endpoints
 export const historyMateApi = createApi({
   reducerPath: "api",
-
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.API_BASE_URL,
+    baseUrl: API_BASE_URL,
     prepareHeaders(headers) {
       return headers;
     },

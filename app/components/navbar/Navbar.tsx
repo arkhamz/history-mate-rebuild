@@ -21,7 +21,7 @@ function Navbar() {
     data: battlesData,
     error: battleError,
     isLoading: battlesLoading,
-  } = useGetBattlesCountQuery();
+  } = useGetBattlesCountQuery(undefined, { skip: !user });
 
   const progress = battlesData?.battles
     ? Math.max(...battlesData.battles.map((b) => b.battle_id))
