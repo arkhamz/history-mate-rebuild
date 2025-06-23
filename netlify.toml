@@ -1,5 +1,5 @@
 [build]
-command = "react-router build"
+command = "vite build"
 publish = "build/client"
 
 [dev]
