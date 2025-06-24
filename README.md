@@ -1,87 +1,17 @@
-# Welcome to React Router!
+## Inspiration & Overview:
 
-A modern, production-ready template for building full-stack React applications using React Router.
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+The idea for History Mate came mostly from the many educational and interesting animated history documentary channels currently thriving on youtube. I greatly enjoy these channels, and wanted to try to creating an app in this genre as a way to develop my backend and frontend skills.
 
 ## Features
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+When signed up and logged into the app, a user is able to view the real-life locations of points in a historical event, e.g. Significant battles of the Thirty Years' War. They can learn about these specific points, and test their knowledge with a small quiz, which allows them to unlock further points in the historical event/conflict, and related educational content. 
 
-## Getting Started
+A user can also learn about the background/prelude to the historical event, as well as the main figures/persons.
 
-### Installation
+## Tech Summary
+- HTML/CSS/Typescript
+- React + Redux Toolkit + Leaflet + Redux Toolkit Query (RTKQ)
+- Nest.js + Typescript + Drizzle ORM + PostgreSQL + Passport JWT authentication
 
-Install the dependencies:
-
-```bash
-npm install
-```
-
-### Development
-
-Start the development server with HMR:
-
-```bash
-npm run dev
-```
-
-Your application will be available at `http://localhost:5173`.
-
-## Building for Production
-
-Create a production build:
-
-```bash
-npm run build
-```
-
-## Deployment
-
-### Docker Deployment
-
-To build and run using Docker:
-
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.
+### Try it out
+[HistoryMate](https://history-mate.netlify.app)
